@@ -85,8 +85,6 @@ typedef struct users {
 	struct profile data;
 	struct users* next;
 };                        //my link list
-
-
 typedef struct bullet {
 	int i;
 	int j;
@@ -96,8 +94,6 @@ typedef struct bullet {
 	int ghost;
 	bullet* next;
 };
-
-
 typedef struct history {
 
 	int fplayerID;
@@ -107,6 +103,8 @@ typedef struct history {
 	int thirdwinnerID;
 	int totalwinnerID;
 };
+
+///////////////////////////////////////////////////////////////////////////////
 
 void inputEROR() {
 	system("cls||clear");
@@ -787,10 +785,322 @@ int gamemenu(users** head, char username[30]) {
 
 int  map1[25][100];
 
+
+
+void creatmap1() {
+
+	for (int i = 0; i <= 24; i++) {
+		for (int j = 0; j <= 99; j++) {
+			if (i == 0 || i == 24) {
+				map1[i][j] = 9;
+			}
+			if (j == 0 || j == 99) {
+				map1[i][j] = 9;
+			}
+			if (i == 1) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 2) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 10;
+				}
+			}
+			if (i == 3) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+				else if (j == 21) {
+					map1[i][j] = 8;
+				}
+				else if (j == 90) {
+					map1[i][j] = 11;
+				}
+				else if (j == 10) {
+					map1[i][j] = 22;
+				}
+			}
+			if (i == 4) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+				else if (j == 21) {
+					map1[i][j] = 8;
+				}
+				else if (j == 50) {
+					map1[i][j] = 5;
+				}
+				else if (j == 83) {
+					map1[i][j] = 6;
+				}
+			}
+			if (i == 5) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+				else if (j == 21) {
+					map1[i][j] = 8;
+				}
+			}
+			if (i == 6) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 7) {
+				if (j <= 13 && j >= 8) {
+					map1[i][j] = 9;
+				}
+				if (j <= 91 && j >= 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 8)
+			{
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 14) {
+					map1[i][j] = 8;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 85) {
+					map1[i][j] = 8;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 9)
+			{
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 14) {
+					map1[i][j] = 8;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 85) {
+					map1[i][j] = 8;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 10) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 29) {
+					map1[i][j] = 7;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j >= 58 && j <= 65) {
+					map1[i][j] = 9;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 11) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 12) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 8;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				if (j == 0) {
+					map1[i][j] = 9;
+				}
+				if (j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 13) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 14) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				if (j <= 42 && j >= 35) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 15) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 14) {
+					map1[i][j] = 8;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 85) {
+					map1[i][j] = 8;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 16) {
+				if (j == 13) {
+					map1[i][j] = 9;
+				}
+				if (j == 14) {
+					map1[i][j] = 8;
+				}
+				if (j == 50) {
+					map1[i][j] = 9;
+				}
+				if (j == 85) {
+					map1[i][j] = 8;
+				}
+				if (j == 86) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 17) {
+				if (j <= 13 && j >= 8) {
+					map1[i][j] = 9;
+				}
+				if (j <= 91 && j >= 86) {
+					map1[i][j] = 9;
+
+				}
+				if (j == 50) {
+					map1[i][j] = 4;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				else if (j == 17) {
+					map1[i][j] = 6;
+				}
+			}
+			if (i == 18) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 19) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+
+				else if (j == 78) {
+					map1[i][j] = 8;
+				}
+			}
+			if (i == 20) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+				else if (j == 78) {
+					map1[i][j] = 8;
+				}
+				if (j == 56) {
+					map1[i][j] = 7;
+				}
+			}
+			if (i == 21) {
+				if (j == 20 || j == 79) {
+					map1[i][j] = 9;
+				}
+				else if (j == 10) {
+					map1[i][j] = 11;
+				}
+				else if (j == 90) {
+					map1[i][j] = 22;
+				}
+				else if (j == 78) {
+					map1[i][j] = 8;
+				}
+			}
+			if (i == 22) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 23) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+
+		}
+	}
+}
 int game1(users** head, player* player1, player* player2) {
 
 
-
+	creatmap1(); 
 	player1->health = 0;
 	player2->health = 0;
 	system("cls||clear");
@@ -821,7 +1131,10 @@ int game1(users** head, player* player1, player* player2) {
 	player2->firstcoord.X = 12;
 	player2->firstcoord.Y = 90;
 
-	
+	int END = 0;
+
+	map1[player1->i][player1->j] = 1;
+	map1[player2->i][player2->j] = 2;
 
 
 }
