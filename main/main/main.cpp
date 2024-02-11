@@ -3617,8 +3617,446 @@ int game1(users** head, player* player1, player* player2) {
 
 }
 
+void creatmap2() {
+	for (int i = 0; i <= 24; i++) {
+		for (int j = 0; j <= 99; j++) {
+			if (i == 0 || i == 24) {
+				map1[i][j] = 9;
+			}
+			if (j == 0 || j == 99) {
+				map1[i][j] = 9;
+			}
+			if (i == 1) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 2) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 10;
+				}
+			}
+			if (i == 3) {
+				if (j == 30 || j == 70) {
+					map1[i][j] = 9;
+				}
+				if (j == 31) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				else if (j == 90) {
+					map1[i][j] = 11;
+				}
+				else if (j == 10) {
+					map1[i][j] = 22;
+				}
+			}
+			if (i == 4) {
+				if (j == 30 || j == 70) {
+					map1[i][j] = 9;
+				}
+				if (j == 69) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 5) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 6) {
+				if (j >= 48 && j <= 52) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 7) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 8) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if (j == 50 || j == 38 || j == 62) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+
+			}
+			if (i == 9)
+			{
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if ((j <= 50 && j >= 46) || j == 37 || j == 63) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 10)
+			{
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if (j == 55) {
+					map1[i][j] = 6;
+				}
+				if (j == 29) {
+					map1[i][j] = 7;
+				}
+				if (j == 46 || j == 36 || j == 64) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 11) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if ((j >= 44 && j <= 46) || (j >= 54 && j <= 56) || j == 35 || j == 65) {
+					map1[i][j] = 9;
+				}
+				if (j == 50) {
+					map1[i][j] = 5;
+				}
+				if (j == 47) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 12) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if (j == 45) {
+					map1[i][j] = 6;
+				}
+				if (j == 54 || j == 36 || j == 64) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 13) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if ((j >= 50 && j <= 54) || j == 37 || j == 63) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 14) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if (j == 50 || j == 38 || j == 62) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 15) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				if (j == 50) {
+					map1[i][j] = 6;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 16) {
+				if (j == 86 || j == 13) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 17) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 18) {
+				if (j >= 48 && j <= 52) {
+					map1[i][j] = 9;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 19) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				if (j == 67) {
+					map1[i][j] = 4;
+				}
+			}
+			if (i == 20) {
+				if (j == 30 || j == 70) {
+					map1[i][j] = 9;
+				}
+				if (j == 56) {
+					map1[i][j] = 7;
+				}
+				if (j == 31) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 21) {
+				if (j == 30 || j == 70) {
+					map1[i][j] = 9;
+				}
+				if (j == 69) {
+					map1[i][j] = 8;
+				}
+				else if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+				else if (j == 10) {
+					map1[i][j] = 11;
+				}
+				else if (j == 90) {
+					map1[i][j] = 22;
+				}
+			}
+			if (i == 22) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+			if (i == 23) {
+				if (j == 0 || j == 99) {
+					map1[i][j] = 9;
+				}
+			}
+
+		}
+	}
 
 
+
+
+}
+int game2(users** head, player* player1, player* player2) {
+	creatmap2();
+	srand(time(NULL));
+
+	bullet* hbullet = NULL;
+	player1->health = 0;
+	player2->health = 0;
+	system("cls||clear");
+	printf(Green);
+	printf("Please enter players Hp\n");
+	printf(Reset);
+	scanf("%d", &player1->health);
+	player2->health = player1->health;
+	system("cls||clear");
+
+	player1->i = 12;
+	player1->j = 9;
+	player1->power = 1;
+	player1->ghostmode = 0;
+	player1->grenade = 0;
+	player1->lastmovement = 'd';
+	player1->firstcoord.X = 12;
+	player1->firstcoord.Y = 9;
+
+
+	player2->i = 12;
+	player2->j = 90;
+	player2->power = 1;
+	player2->ghostmode = 0;
+	player2->grenade = 0;
+	player2->lastmovement = 'j';
+	player2->firstcoord.X = 12;
+	player2->firstcoord.Y = 90;
+
+	ghostmodeon = 0;
+	heartkiton = 1;
+	poweron = 1;
+	grenadeon = 1;
+	ghostexist = 1;
+	powercontrol1 = 0;
+	powercontrol2 = 0;
+	ghosthold = 0;
+
+	int END = 0;
+
+	map1[player1->i][player1->j] = 1;
+	map1[player2->i][player2->j] = 2;
+
+	for (int i = 0; i <= 24; i++) {
+		for (int j = 0; j <= 99; j++) {
+			converttochar1(i, j);
+
+		}
+		printf("\n");
+	}
+	printf("\tplayer1:%s \t\t\t\t\t\t\t        player2:%s\n", player1->name, player2->name);
+	printhealthline(player1, player2);
+	printdamageline(player1, player2);
+	gotoxy(28, 0);
+	printf("\twins: % d \t\t\t\t\t\t\t\twins: % d \n", player1->win, player2->win);
+	gotoxy(0, 0);
+
+	clock_t starttime1, currenttime1, starttime2, currenttime2;
+	starttime1 = clock();
+	starttime2 = clock();
+
+	for (;;) {
+		currenttime1 = clock();
+		currenttime2 = clock();
+		if ((double)(currenttime1 - starttime1) / CLOCKS_PER_SEC >= 0.15) {
+			timer1s = 1;
+		}
+		if ((double)(currenttime2 - starttime2) / CLOCKS_PER_SEC >= 0.15) {
+			timer2s = 1;
+		}
+		_sleep(Bulletspeed);
+		bulletmoving(&hbullet, player1, player2);
+		if (_kbhit()) {
+			map1[player1->i][player1->j] = 1;
+			map1[player2->i][player2->j] = 2;
+			char input = _getch();
+
+			controler1(player1, input);
+			controler2(player2, input);
+			if (input == 'c' || input == 'C') {
+				if (timer1s == 0)continue;
+				if (powercontrol1 > 0)powercontrol1--;
+				if (powercontrol1 == 0) {
+
+					player1->power = 1;
+					printdamageline(player1, player2);
+				}
+
+				hbullet = creatbullet(&hbullet, player1);
+				starttime1 = clock();
+				timer1s = 0;
+			}
+			if (input == 'N' || input == 'n') {
+				if (timer2s == 0)continue;
+				if (powercontrol2 > 0)powercontrol2--;
+				if (powercontrol2 == 0) {
+
+					player2->power = 1;
+					printdamageline(player1, player2);
+				}
+				hbullet = creatbullet(&hbullet, player2);
+				starttime2 = clock();
+				timer2s = 0;
+			}
+			printchanges();
+
+		}
+		if (player1->health <= 0) {
+			END = 1;
+			winnername(*player2);
+			player2->win++;
+			return 2;
+		}
+		if (player2->health <= 0) {
+			END = 2;
+			winnername(*player1);
+			player1->win++;
+			return 1;
+		}
+		int h = (rand() % (500 - 0 + 1)) + 0;
+		if (h == 5) {
+			if (heartkiton == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 5;
+				heartkiton = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
+			}
+		}
+		if (h == 0) {
+			if (poweron == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 7;
+				poweron = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+
+				converttochar1(numi, j);
+			}
+
+		}
+		if (h == 4) {
+			if (grenadeon == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 4;
+				grenadeon = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
+			}
+		}
+		if (h == 100) {
+			if (ghostexist == 1) {
+				continue;
+			}
+			if (ghostmodeon == 1) {
+				continue;
+			}
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 10;
+				ghostexist = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
+			}
+		}
+	}
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 int main() {
