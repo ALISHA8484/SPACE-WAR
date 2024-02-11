@@ -784,6 +784,7 @@ int gamemenu(users** head, char username[30]) {
 ///////////////////////////////////////////////////////////////////////////////
 
 int  map1[25][100];
+COORD changes;
 
 void gotoxy(int x, int y) {
 	COORD coord;
@@ -899,6 +900,325 @@ void printdamageline(player* player1, player* player2) {
 	printf("power: % dX \n", player2->power);
 	gotoxy(0, 0);
 }
+
+void printchanges() {
+
+	int x = changes.X - 1;
+	int y = changes.Y - 1;
+	gotoxy((changes.X - 1), (changes.Y - 1));
+	for (int t = 1; t <= 3; t++) {
+		for (int w = 1; w <= 3; w++) {
+
+			converttochar1(x, y);
+			y++;
+		}
+		y -= 3;
+		x++;
+		gotoxy(x, y);
+	}
+	gotoxy(0, 0);
+
+
+}
+void whathappend(player* player, int i, int j, int whichplayer) {
+	if (player->ghostmode == 0) {
+		if (map1[i][j] == 9 || map1[i][j] == 8) {
+			return;
+		}
+		else if (map1[i][j] == 6) {
+			map1[player->i][player->j] = 0;
+			printchanges();
+			if (whichplayer == 1) {
+				player->i = player->firstcoord.X;
+				player->j = player->firstcoord.Y;
+				changes.X = player->firstcoord.X;
+				changes.Y = player->firstcoord.Y;
+				player->health--;
+				gotoxy(26, 13);
+				printf("%d", player->health);
+				gotoxy(0, 0);
+			}
+			if (whichplayer == 2) {
+				player->i = player->firstcoord.X;
+				player->j = player->firstcoord.Y;
+				changes.X = player->firstcoord.X;
+				changes.Y = player->firstcoord.Y;
+				player->health--;
+				gotoxy(26, 85);
+				printf("%d", player->health);
+				gotoxy(0, 0);
+			}
+		}
+		else if (map1[i][j] == 11 || map1[i][j] == 22) {
+			map1[player->i][player->j] = 0;
+			printchanges();
+			if (i == 3) {
+				if (j == 10) {
+					if (player->lastmovement == 'w' || player->lastmovement == 'W') {
+						player->i = 20;
+						player->j = 90;
+					}
+					if (player->lastmovement == 's' || player->lastmovement == 'S') {
+						player->i = 22;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'a' || player->lastmovement == 'A') {
+						player->i = 21;
+						player->j = 89;
+					}
+					if (player->lastmovement == 'd' || player->lastmovement == 'D') {
+						player->i = 21;
+						player->j = 91;
+					}
+					if (player->lastmovement == 'i' || player->lastmovement == 'I') {
+						player->i = 20;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'k' || player->lastmovement == 'K') {
+						player->i = 22;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'j' || player->lastmovement == 'J') {
+						player->i = 21;
+						player->j = 89;
+					}
+					if (player->lastmovement == 'l' || player->lastmovement == 'L') {
+						player->i = 21;
+						player->j = 91;
+					}
+
+				}
+				if (j == 90) {
+					if (player->lastmovement == 'w' || player->lastmovement == 'W') {
+						player->i = 20;
+						player->j = 10;
+					}
+					if (player->lastmovement == 's' || player->lastmovement == 'S') {
+						player->i = 22;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'a' || player->lastmovement == 'A') {
+						player->i = 21;
+						player->j = 9;
+					}
+					if (player->lastmovement == 'd' || player->lastmovement == 'D') {
+						player->i = 21;
+						player->j = 11;
+					}
+					if (player->lastmovement == 'i' || player->lastmovement == 'I') {
+						player->i = 20;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'k' || player->lastmovement == 'K') {
+						player->i = 22;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'j' || player->lastmovement == 'J') {
+						player->i = 21;
+						player->j = 9;
+					}
+					if (player->lastmovement == 'l' || player->lastmovement == 'L') {
+						player->i = 21;
+						player->j = 11;
+					}
+				}
+			}
+			if (i == 21) {
+				if (j == 10) {
+					if (player->lastmovement == 'w' || player->lastmovement == 'W') {
+						player->i = 2;
+						player->j = 90;
+					}
+					if (player->lastmovement == 's' || player->lastmovement == 'S') {
+						player->i = 4;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'a' || player->lastmovement == 'A') {
+						player->i = 3;
+						player->j = 89;
+					}
+					if (player->lastmovement == 'd' || player->lastmovement == 'D') {
+						player->i = 3;
+						player->j = 91;
+					}
+					if (player->lastmovement == 'i' || player->lastmovement == 'I') {
+						player->i = 2;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'k' || player->lastmovement == 'K') {
+						player->i = 4;
+						player->j = 90;
+					}
+					if (player->lastmovement == 'j' || player->lastmovement == 'J') {
+						player->i = 3;
+						player->j = 89;
+					}
+					if (player->lastmovement == 'l' || player->lastmovement == 'L') {
+						player->i = 3;
+						player->j = 91;
+					}
+
+				}
+				if (j == 90) {
+					if (player->lastmovement == 'w' || player->lastmovement == 'W') {
+						player->i = 2;
+						player->j = 10;
+					}
+					if (player->lastmovement == 's' || player->lastmovement == 'S') {
+						player->i = 4;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'a' || player->lastmovement == 'A') {
+						player->i = 3;
+						player->j = 9;
+					}
+					if (player->lastmovement == 'd' || player->lastmovement == 'D') {
+						player->i = 3;
+						player->j = 11;
+					}
+					if (player->lastmovement == 'i' || player->lastmovement == 'I') {
+						player->i = 2;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'k' || player->lastmovement == 'K') {
+						player->i = 4;
+						player->j = 10;
+					}
+					if (player->lastmovement == 'j' || player->lastmovement == 'J') {
+						player->i = 3;
+						player->j = 9;
+					}
+					if (player->lastmovement == 'l' || player->lastmovement == 'L') {
+						player->i = 3;
+						player->j = 11;
+					}
+				}
+			}
+			changes.X = player->i;
+			changes.Y = player->j;
+			printchanges();
+		}
+
+		else {
+			if (map1[i][j] == 5) {
+				player->health += 5;
+				
+				if (whichplayer == 1) {
+					gotoxy(26, 13);
+				}
+				if (whichplayer == 2) {
+					gotoxy(26, 85);
+				}
+				printf("%d", player->health);
+				gotoxy(0, 0);
+			}
+			if (map1[i][j] == 7) {
+				player->power = 2;
+				
+				if (whichplayer == 1) {
+					
+					gotoxy(27, 16);
+					printf("2");
+					gotoxy(0, 0);
+				}
+				if (whichplayer == 2) {
+					
+					gotoxy(27, 88);
+					printf("2");
+					gotoxy(0, 0);
+				}
+			}
+			if (map1[i][j] == 4) {
+				
+				player->grenade = 1;
+			}
+			if (map1[i][j] == 10) {
+				player->ghostmode = 1;
+				
+			}
+			map1[player->i][player->j] = 0;
+			player->i = i;
+			player->j = j;
+			changes.X = player->i;
+			changes.Y = player->j;
+		}
+
+		if (whichplayer == 1)map1[player->i][player->j] = 1;
+		if (whichplayer == 2)map1[player->i][player->j] = 2;
+		printchanges();
+		if (player->ghostmode == 1)return;
+
+	}
+	
+}
+
+void controler1(player* player1, char input) {
+
+	if (input == 'w' || input == 'W') {
+		player1->lastmovement = input;
+		changes.X = player1->i;
+		changes.Y = player1->j;
+		whathappend(player1, ((player1->i) - 1), (player1->j), 1);
+	}
+	else if (input == 's' || input == 'S') {
+		player1->lastmovement = input;
+		changes.X = player1->i;
+		changes.Y = player1->j;
+		whathappend(player1, ((player1->i) + 1), (player1->j), 1);
+
+	}
+	else if (input == 'a' || input == 'A') {
+		player1->lastmovement = input;
+		changes.X = player1->i;
+		changes.Y = player1->j;
+		whathappend(player1, ((player1->i)), ((player1->j) - 1), 1);
+	}
+	else if (input == 'd' || input == 'D') {
+		player1->lastmovement = input;
+		changes.X = player1->i;
+		changes.Y = player1->j;
+		whathappend(player1, ((player1->i)), ((player1->j) + 1), 1);
+	}
+	if (player1->ghostmode == 1) {
+		ghostmodecharge--;
+		if (ghostmodecharge == 0) {
+			if (ghosthold != 0) {
+				ghostmodecharge++;
+				return;
+			}
+			player1->ghostmode = 0;
+			ghostmodeon = 0;
+		}
+	}
+}
+void controler2(player* player2, char input) {
+	if (input == 'i' || input == 'I') {
+		player2->lastmovement = input;
+		changes.X = player2->i;
+		changes.Y = player2->j;
+		whathappend(player2, ((player2->i) - 1), (player2->j), 2);
+	}
+	if (input == 'K' || input == 'k') {
+		player2->lastmovement = input;
+		changes.X = player2->i;
+		changes.Y = player2->j;
+		whathappend(player2, ((player2->i) + 1), (player2->j), 2);
+	}
+	if (input == 'j' || input == 'J') {
+		player2->lastmovement = input;
+		changes.X = player2->i;
+		changes.Y = player2->j;
+		whathappend(player2, ((player2->i)), ((player2->j) - 1), 2);
+	}
+	if (input == 'l' || input == 'L') {
+		player2->lastmovement = input;
+		changes.X = player2->i;
+		changes.Y = player2->j;
+		whathappend(player2, ((player2->i)), ((player2->j) + 1), 2);
+	}
+
+}
+
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -1265,6 +1585,30 @@ int game1(users** head, player* player1, player* player2) {
 	gotoxy(28, 0);
 	printf("\twins: % d \t\t\t\t\t\t\t\twins: % d \n", player1->win, player2->win);
 	gotoxy(0, 0);
+
+	for (;;) {
+		
+		_sleep(Bulletspeed);
+		if (_kbhit()) {
+			map1[player1->i][player1->j] = 1;
+			map1[player2->i][player2->j] = 2;
+			char input = _getch();
+
+			controler1(player1, input);
+			controler2(player2, input);
+
+			if (input == 'c' || input == 'C') {
+				
+			}
+			if (input == 'N' || input == 'n') {
+				
+			}
+
+		}
+		
+		
+
+	}
 
 }
 
