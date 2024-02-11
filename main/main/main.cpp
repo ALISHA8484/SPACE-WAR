@@ -1,4 +1,4 @@
-#include<thread>
+﻿#include<thread>
 #include<iostream>
 #include<stdio.h>
 #include<string.h>
@@ -786,6 +786,94 @@ int gamemenu(users** head, char username[30]) {
 int  map1[25][100];
 
 
+void converttochar1(int i, int j) {
+	if (map1[i][j] == 9) {
+		printf(lavenderblush);
+		printf("%c", 219);
+		printf(Reset);
+	}
+	if (map1[i][j] == 8) {
+		printf(Yellow);
+		printf("%c", 186);
+		printf(Reset);
+	}
+	if (map1[i][j] == 0) {
+		printf("%c", ' ');
+	}
+	if (map1[i][j] == 1) {
+		printf(Blue);
+		setu16;
+		wprintf(L"ʘ");
+		settxt;
+		printf(Reset);
+	}
+	if (map1[i][j] == 2) {
+		printf(Red);
+		setu16;
+		wprintf(L"ʘ");
+		settxt;
+		printf(Reset);
+	}
+	if (map1[i][j] == 3) {
+		printf(Orange);
+		setu16;
+		wprintf(L"•");
+		settxt;
+		printf(Reset);
+	}
+	if (map1[i][j] == 4) {
+		printf(Green);
+		setu16;
+		wprintf(L"Ơ");
+		settxt;
+		printf(Reset);
+	}
+	if (map1[i][j] == 5) {
+
+		setu16;
+		wprintf(L"❤");
+		settxt;
+
+	}
+	if (map1[i][j] == 6) {
+
+		printf("@");
+	}
+	if (map1[i][j] == 11) {
+		printf(Yellow);
+		setu16;
+		wprintf(L"֍");
+		settxt;
+		printf(Reset);
+
+	}
+	if (map1[i][j] == 22) {
+
+		printf(Pink);
+		setu16;
+		wprintf(L"֍");
+		settxt;
+		printf(Reset);
+
+	}
+	if (map1[i][j] == 7) {
+		printf(Orange);
+		setu16;
+		wprintf(L"✶");
+		settxt;
+		printf(Reset);
+
+	}
+	if (map1[i][j] == 10) {
+
+		setu16;
+		wprintf(L"ᦪ");
+		settxt;
+
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////
 
 void creatmap1() {
 
@@ -1136,8 +1224,20 @@ int game1(users** head, player* player1, player* player2) {
 	map1[player1->i][player1->j] = 1;
 	map1[player2->i][player2->j] = 2;
 
+	for (int i = 0; i <= 24; i++) {
+		for (int j = 0; j <= 99; j++) {
+
+			converttochar1(i, j);
+
+		}
+		printf("\n");
+	}
 
 }
+
+
+
+
 
 int main() {
 
