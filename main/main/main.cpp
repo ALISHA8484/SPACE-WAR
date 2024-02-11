@@ -3545,12 +3545,10 @@ void creatmap1() {
 	}
 }
 int game1(users** head, player* player1, player* player2) {
-
 	srand(time(NULL));
+	creatmap1();
 
-	creatmap1(); 
-
-	bullet* hbullet = NULL; 
+	bullet* hbullet = NULL;
 	player1->health = 0;
 	player2->health = 0;
 	system("cls||clear");
@@ -3581,6 +3579,15 @@ int game1(users** head, player* player1, player* player2) {
 	player2->firstcoord.X = 12;
 	player2->firstcoord.Y = 90;
 
+	ghostmodeon = 0;
+	heartkiton = 1;
+	poweron = 1;
+	grenadeon = 1;
+	ghostexist = 1;
+	powercontrol1 = 0;
+	powercontrol2 = 0;
+	ghosthold = 0;
+
 	int END = 0;
 
 	map1[player1->i][player1->j] = 1;
@@ -3594,20 +3601,18 @@ int game1(users** head, player* player1, player* player2) {
 		}
 		printf("\n");
 	}
+
 	printf("\tplayer1:%s \t\t\t\t\t\t\t        player2:%s\n", player1->name, player2->name);
 	printhealthline(player1, player2);
 	printdamageline(player1, player2);
 	gotoxy(28, 0);
 	printf("\twins: % d \t\t\t\t\t\t\t\twins: % d \n", player1->win, player2->win);
 	gotoxy(0, 0);
-
 	clock_t starttime1, currenttime1, starttime2, currenttime2;
-	starttime1 = clock();
+	starttime1 = clock();;
 	starttime2 = clock();
-
 	for (;;) {
-
-		currenttime1 = clock();
+		currenttime1 = clock();;
 		currenttime2 = clock();
 		if ((double)(currenttime1 - starttime1) / CLOCKS_PER_SEC >= 0.15) {
 			timer1s = 1;
@@ -3615,18 +3620,18 @@ int game1(users** head, player* player1, player* player2) {
 		if ((double)(currenttime2 - starttime2) / CLOCKS_PER_SEC >= 0.15) {
 			timer2s = 1;
 		}
-
 		_sleep(Bulletspeed);
+		bulletmoving(&hbullet, player1, player2);
 		if (_kbhit()) {
+			//
 			map1[player1->i][player1->j] = 1;
 			map1[player2->i][player2->j] = 2;
 			char input = _getch();
-
+			//
 			controler1(player1, input);
 			controler2(player2, input);
-
+			//
 			if (input == 'c' || input == 'C') {
-
 				if (timer1s == 0)continue;
 				if (powercontrol1 > 0)powercontrol1--;
 				if (powercontrol1 == 0) {
@@ -3636,10 +3641,8 @@ int game1(users** head, player* player1, player* player2) {
 				hbullet = creatbullet(&hbullet, player1);
 				starttime1 = clock();
 				timer1s = 0;
-
 			}
 			if (input == 'N' || input == 'n') {
-
 				if (timer2s == 0)continue;
 				if (powercontrol2 > 0)powercontrol2--;
 				if (powercontrol2 == 0) {
@@ -3648,14 +3651,11 @@ int game1(users** head, player* player1, player* player2) {
 				}
 				hbullet = creatbullet(&hbullet, player2);
 				starttime2 = clock();
-				timer2s = 0; 
-
+				timer2s = 0;
 			}
 			printchanges();
-			
 		}
-
-		
+		//
 		if (player1->health <= 0) {
 			END = 1;
 			winnername(*player2);
@@ -3668,7 +3668,8 @@ int game1(users** head, player* player1, player* player2) {
 			player1->win++;
 			return 1;
 		}
-
+		//
+		//
 		int h = (rand() % (500 - 0 + 1)) + 0;
 		if (h == 5) {
 			if (heartkiton == 1)continue;
@@ -3729,11 +3730,12 @@ int game1(users** head, player* player1, player* player2) {
 				converttochar1(numi, j);
 			}
 		}
-		
-
+		//
 	}
 
+
 }
+
 
 void creatmap2() {
 	for (int i = 0; i <= 24; i++) {
