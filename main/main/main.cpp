@@ -785,6 +785,12 @@ int gamemenu(users** head, char username[30]) {
 
 int  map1[25][100];
 
+void gotoxy(int x, int y) {
+	COORD coord;
+	coord.X = y;
+	coord.Y = x;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
 
 void converttochar1(int i, int j) {
 	if (map1[i][j] == 9) {
@@ -871,6 +877,27 @@ void converttochar1(int i, int j) {
 		settxt;
 
 	}
+}
+void printhealthline(player* player1, player* player2) {
+	gotoxy(26, 0);
+	if (player1->health > 9) {
+		printf("\tHp: % d ", player1->health);
+		printf("\t\t\t\t\t\t\t        ");
+		printf("Hp: % d ", player2->health);
+	}
+	else {
+		printf("\tHp: % d ", player1->health);
+		printf("\t\t\t\t\t\t\t\t        ");
+		printf("Hp: % d ", player2->health);
+	}
+	gotoxy(0, 0);
+}
+void printdamageline(player* player1, player* player2) {
+	gotoxy(27, 0);
+	printf("\tpower: % dX ", player1->power);
+	printf("\t\t\t\t\t\t\t        ");
+	printf("power: % dX \n", player2->power);
+	gotoxy(0, 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1232,6 +1259,12 @@ int game1(users** head, player* player1, player* player2) {
 		}
 		printf("\n");
 	}
+	printf("\tplayer1:%s \t\t\t\t\t\t\t        player2:%s\n", player1->name, player2->name);
+	printhealthline(player1, player2);
+	printdamageline(player1, player2);
+	gotoxy(28, 0);
+	printf("\twins: % d \t\t\t\t\t\t\t\twins: % d \n", player1->win, player2->win);
+	gotoxy(0, 0);
 
 }
 
