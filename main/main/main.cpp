@@ -799,6 +799,9 @@ int ghosthold;
 int ghostmodeon;
 int ghostmodecharge;
 
+int timer1s = 0;
+int timer2s = 0;
+
 void winnername(player playerx) {
 	system("cls||clear");
 	printf(Yellow);
@@ -3425,6 +3428,7 @@ void creatmap1() {
 }
 int game1(users** head, player* player1, player* player2) {
 
+	srand(time(NULL));
 
 	creatmap1(); 
 
@@ -3479,8 +3483,21 @@ int game1(users** head, player* player1, player* player2) {
 	printf("\twins: % d \t\t\t\t\t\t\t\twins: % d \n", player1->win, player2->win);
 	gotoxy(0, 0);
 
+	clock_t starttime1, currenttime1, starttime2, currenttime2;
+	starttime1 = clock();
+	starttime2 = clock();
+
 	for (;;) {
-		
+
+		currenttime1 = clock();
+		currenttime2 = clock();
+		if ((double)(currenttime1 - starttime1) / CLOCKS_PER_SEC >= 0.15) {
+			timer1s = 1;
+		}
+		if ((double)(currenttime2 - starttime2) / CLOCKS_PER_SEC >= 0.15) {
+			timer2s = 1;
+		}
+
 		_sleep(Bulletspeed);
 		if (_kbhit()) {
 			map1[player1->i][player1->j] = 1;
@@ -3492,22 +3509,28 @@ int game1(users** head, player* player1, player* player2) {
 
 			if (input == 'c' || input == 'C') {
 
+				if (timer1s == 0)continue;
 				if (powercontrol1 > 0)powercontrol1--;
 				if (powercontrol1 == 0) {
 					player1->power = 1;
 					printdamageline(player1, player2);
 				}
 				hbullet = creatbullet(&hbullet, player1);
-				
+				starttime1 = clock();
+				timer1s = 0;
+
 			}
 			if (input == 'N' || input == 'n') {
 
+				if (timer2s == 0)continue;
 				if (powercontrol2 > 0)powercontrol2--;
 				if (powercontrol2 == 0) {
 					player2->power = 1;
 					printdamageline(player1, player2);
 				}
 				hbullet = creatbullet(&hbullet, player2);
+				starttime2 = clock();
+				timer2s = 0; 
 
 			}
 			printchanges();
