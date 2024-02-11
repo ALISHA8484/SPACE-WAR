@@ -710,6 +710,19 @@ profile player2login(users** head, char username[30]) {
 	}
 }
 
+char* findusernamewithid(users* head, int x) {
+	users* temp;
+	temp = head;
+	for (;;) {
+		if (temp->data.id == x) {
+
+			return temp->data.username;
+		}
+		temp = temp->next;
+
+	}
+
+}
 void readhistory(users user, users* head) {
 	system("cls||clear");
 	FILE* hhh;
