@@ -2544,6 +2544,515 @@ void bulletmoving(bullet** hbullet, player* player1, player* player2) {
 
 
 			}
+
+			else {
+				if (temp->side == 'd' || temp->side == 'D') {
+
+					if (temp->j == 98 || map1[temp->i][temp->j + 1] == 1 || map1[temp->i][temp->j + 1] == 2) {
+						if (temp->greanade == 1) {
+							player1->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i][temp->j + 1] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i][temp->j + 1] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+
+					else if (map1[temp->i][temp->j + 1] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'a' || temp->side == 'A') {
+					if (temp->j == 1 || map1[temp->i][temp->j - 1] == 1 || map1[temp->i][temp->j - 1] == 2) {
+						if (temp->greanade == 1) {
+							player1->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i][temp->j - 1] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i][temp->j - 1] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+
+					else if (map1[temp->i][temp->j - 1] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'w' || temp->side == 'W') {
+
+					if (temp->i == 1 || map1[temp->i - 1][temp->j] == 1 || map1[temp->i - 1][temp->j] == 2) {
+						if (temp->greanade == 1) {
+							player1->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i - 1][temp->j] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i - 1][temp->j] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i - 1][temp->j] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 's' || temp->side == 'S') {
+					if (temp->i == 23 || map1[temp->i + 1][temp->j] == 1 || map1[temp->i + 1][temp->j] == 2) {
+						if (temp->greanade == 1) {
+							player1->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i + 1][temp->j] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i + 1][temp->j] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i + 1][temp->j] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+
+
+				if (temp->side == 'l' || temp->side == 'L') {
+					if (temp->j == 98 || map1[temp->i][temp->j + 1] == 1 || map1[temp->i][temp->j + 1] == 2) {
+						if (temp->greanade == 1) {
+							player2->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i][temp->j + 1] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i][temp->j + 1] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+
+					else if (map1[temp->i][temp->j + 1] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'j' || temp->side == 'J') {
+					if (temp->j == 1 || map1[temp->i][temp->j - 1] == 1 || map1[temp->i][temp->j - 1] == 2) {
+						if (temp->greanade == 1) {
+							player2->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i][temp->j - 1] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i][temp->j - 1] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+
+					else if (map1[temp->i][temp->j - 1] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'i' || temp->side == 'I') {
+					if (temp->i == 1 || map1[temp->i - 1][temp->j] == 1 || map1[temp->i - 1][temp->j] == 2) {
+						if (temp->greanade == 1) {
+							player2->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i - 1][temp->j] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i - 1][temp->j] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i - 1][temp->j] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'k' || temp->side == 'K') {
+					if (temp->i == 23 || map1[temp->i + 1][temp->j] == 1 || map1[temp->i + 1][temp->j] == 2) {
+						if (temp->greanade == 1) {
+							player2->grenade = 0;
+							map1[temp->i][temp->j] = 0;
+							grenadeexplosion(temp, player1, player2, 9);
+							if (*hbullet == temp) {
+								temp = deleteheadbullet(hbullet, temp);
+								continue;
+							}
+							bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+							bdelete = temp;
+							prev->next = temp->next;
+							temp = temp->next;
+							free(bdelete);
+							continue;
+						}
+						if (map1[temp->i + 1][temp->j] == 1) {
+							player1->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						if (map1[temp->i + 1][temp->j] == 2) {
+							player2->health -= temp->damage;
+							printhealthline(player1, player2);
+						}
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i + 1][temp->j] != 0) {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						if (map1[temp->i][temp->j] != 9) { map1[temp->i][temp->j] = 0; }
+
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				}
+
 			changes.X = temp->i;
 			changes.Y = temp->j;
 			printchanges();
