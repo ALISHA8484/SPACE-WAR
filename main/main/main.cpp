@@ -1283,6 +1283,54 @@ void winnername(player playerx) {
 	Sleep(2000);
 	system("cls||clear");
 }
+
+
+bullet* creatbullet(bullet** hbullet, player* playerx) {
+	bullet* newb = (bullet*)malloc(sizeof(bullet));
+	newb->side = playerx->lastmovement;
+	if (newb->side == 'w' || newb->side == 'W') {
+		newb->i = (playerx->i - 1);
+		newb->j = playerx->j;
+	}
+	if (newb->side == 's' || newb->side == 'S') {
+		newb->i = (playerx->i + 1);
+		newb->j = playerx->j;
+	}
+	if (newb->side == 'a' || newb->side == 'A') {
+		newb->i = (playerx->i);
+		newb->j = (playerx->j - 1);
+	}
+	if (newb->side == 'd' || newb->side == 'D') {
+		newb->i = playerx->i;
+		newb->j = (playerx->j + 1);
+	}
+	if (newb->side == 'i' || newb->side == 'I') {
+		newb->i = (playerx->i - 1);
+		newb->j = playerx->j;
+	}
+	if (newb->side == 'k' || newb->side == 'K') {
+		newb->i = (playerx->i + 1);
+		newb->j = playerx->j;
+	}
+	if (newb->side == 'j' || newb->side == 'J') {
+		newb->i = (playerx->i);
+		newb->j = (playerx->j - 1);
+	}
+	if (newb->side == 'l' || newb->side == 'L') {
+		newb->i = playerx->i;
+		newb->j = (playerx->j + 1);
+	}
+	newb->damage = playerx->power;
+	newb->greanade = playerx->grenade;
+	newb->ghost = playerx->ghostmode;
+	playerx->grenade = 0;
+
+
+	newb->next = *hbullet;
+	*hbullet = newb;
+	return *hbullet;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 
 void creatmap1() {
@@ -1599,6 +1647,8 @@ int game1(users** head, player* player1, player* player2) {
 
 
 	creatmap1(); 
+
+	bullet* hbullet = NULL; 
 	player1->health = 0;
 	player2->health = 0;
 	system("cls||clear");
@@ -1661,89 +1711,96 @@ int game1(users** head, player* player1, player* player2) {
 			controler2(player2, input);
 
 			if (input == 'c' || input == 'C') {
+
+				if (powercontrol1 > 0)powercontrol1--;
+				if (powercontrol1 == 0) {
+					player1->power = 1;
+					printdamageline(player1, player2);
+				}
+				hbullet = creatbullet(&hbullet, player1);
 				
 			}
 			if (input == 'N' || input == 'n') {
 				
 			}
+			printchanges();
+			
+		}
 
-			if (player1->health <= 0) {
-				END = 1;
-				winnername(*player2);
-				player2->win++;
-				return 2;
+		
+		if (player1->health <= 0) {
+			END = 1;
+			winnername(*player2);
+			player2->win++;
+			return 2;
+		}
+		if (player2->health <= 0) {
+			END = 2;
+			winnername(*player1);
+			player1->win++;
+			return 1;
+		}
+
+		int h = (rand() % (500 - 0 + 1)) + 0;
+		if (h == 5) {
+			if (heartkiton == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 5;
+				heartkiton = 1;
 			}
-			if (player2->health <= 0) {
-				END = 2;
-				winnername(*player1);
-				player1->win++;
-				return 1;
-			}
-
-
-
-			int h = (rand() % (500 - 0 + 1)) + 0;
-			if (h == 5) {
-				if (heartkiton == 1)continue;
-				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
-				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
-				if (map1[numi][numj] == 0) {
-					map1[numi][numj] = 5;
-					heartkiton = 1;
-				}
-				gotoxy(numi, 0);
-				for (int j = 0; j <= 99; j++) {
-					converttochar1(numi, j);
-				}
-			}
-			if (h == 0) {
-				if (poweron == 1)continue;
-				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
-				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
-				if (map1[numi][numj] == 0) {
-					map1[numi][numj] = 7;
-					poweron = 1;
-				}
-				gotoxy(numi, 0);
-				for (int j = 0; j <= 99; j++) {
-
-					converttochar1(numi, j);
-				}
-
-			}
-			if (h == 4) {
-				if (grenadeon == 1)continue;
-				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
-				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
-				if (map1[numi][numj] == 0) {
-					map1[numi][numj] = 4;
-					grenadeon = 1;
-				}
-				gotoxy(numi, 0);
-				for (int j = 0; j <= 99; j++) {
-					converttochar1(numi, j);
-				}
-			}
-			if (h == 100) {
-				if (ghostexist == 1) {
-					continue;
-				}
-				if (ghostmodeon == 1) {
-					continue;
-				}
-				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
-				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
-				if (map1[numi][numj] == 0) {
-					map1[numi][numj] = 10;
-					ghostexist = 1;
-				}
-				gotoxy(numi, 0);
-				for (int j = 0; j <= 99; j++) {
-					converttochar1(numi, j);
-				}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
 			}
 		}
-		
+		if (h == 0) {
+			if (poweron == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 7;
+				poweron = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+
+				converttochar1(numi, j);
+			}
+
+		}
+		if (h == 4) {
+			if (grenadeon == 1)continue;
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 4;
+				grenadeon = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
+			}
+		}
+		if (h == 100) {
+			if (ghostexist == 1) {
+				continue;
+			}
+			if (ghostmodeon == 1) {
+				continue;
+			}
+			int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+			int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+			if (map1[numi][numj] == 0) {
+				map1[numi][numj] = 10;
+				ghostexist = 1;
+			}
+			gotoxy(numi, 0);
+			for (int j = 0; j <= 99; j++) {
+				converttochar1(numi, j);
+			}
+		}
 		
 
 	}
