@@ -108,7 +108,12 @@ typedef struct history {
 	int totalwinnerID;
 };
 
-
+void inputEROR() {
+	system("cls||clear");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\ \033[1;31m% WRONG INPUTE!!!!TRY AGAIN\033[0m");
+	Sleep(1500);
+	system("cls||clear");
+}
 void firstwellcome() {
 	system("cls||clear");
 	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t");
@@ -127,6 +132,19 @@ void firstwellcome() {
 	}
 	_sleep(4000);
 	system("cls||clear");
+}
+void printwelcome() {
+
+	printf(Blue);
+	printf("                           oooo  oooo                                                  \n");
+	printf("                           `888  `888                                                  \n");
+	printf("oooo oooo    ooo  .ooooo.   888   888   .ooooo.    .ooooo.  ooo. .oo.  .oo.    .ooooo.  \n");
+	printf(" `88. `88.  .8'  d88' `88b  888   888  d88' ` `Y  d88' `88b `888P`Y88bP`Y88b  d88' `88b \n");
+	printf("  `88..]88..8'   888ooo888  888   888  888        888   888  888   888   888  888ooo888 \n");
+	printf("   `888'`888'    888     .  888   888  888   .o8  888   888  888   888   888  888     . \n");
+	printf("    `8'  `8'     `Y8bod8P' o888o o888o `Y8bod8P'  `Y8bod8P' o888o o888o o888o `Y8bod8P' \n");
+	printf("                                                                                       \n");
+	printf(Reset);
 }
 
 users* readfile() {
@@ -205,6 +223,7 @@ int firstmenu() {
 	}
 
 }
+
 void signup(users** head) {
 	system("cls||clear");
 	printf(Green);
@@ -349,6 +368,194 @@ void signup(users** head) {
 	temp->data.point = 0;
 	*head = temp;
 }
+profile signin(users** head) {
+	for (;;) {
+		system("cls||clear");
+		printf(Blue);
+		printf("please enter your user name: ");
+		printf(Reset);
+		char inputusername[20];
+		gets_s(inputusername);
+		users* temp;
+		temp = *head;
+		int userfound = 0;
+		for (; temp != NULL;) {
+			if (strcmp(temp->data.username, inputusername) != 0) {
+				temp = temp->next;
+				continue;
+			}
+			userfound = 1;
+			break;
+		}
+		if (userfound == 0) {
+			system("cls||clear");
+			printf(Red);
+			printf("user not found!");
+			printf(Reset);
+			Sleep(2000);
+			continue;
+		}
+		system("cls||clear");
+		printf(Yellow);
+		printf("Hiiii %s", inputusername);
+		printf(Reset);
+		Sleep(2000);
+		for (;;) {
+			system("cls||clear");
+			printf(Blue);
+			printf("1 - Enter password\n\n2 - Forgot PASSWORD\n\n");
+			printf(Reset);
+			char choice[50];
+			gets_s(choice);
+			if (strlen(choice) > 1) {
+				inputEROR();
+				continue;
+			}
+			if (choice[0] == '1')
+			{
+				for (;;) {
+					char inputepassword[30] = { '\0' };
+					system("cls||clear");
+					printf(Blue);
+					printf("Please enter your password:\n ");
+					printf(Reset);
+					for (int i = 0;; ) {
+						char t = _getch();
+
+						if (t == '\r') {
+							inputepassword[i] = '\0';
+							break;
+						}
+						else if (t == '\b' && i > 0) {
+							printf("\b \b");
+							i--;
+							continue;
+						}
+						if (t == '\b' && i == 0)continue;
+						printf("*");
+						inputepassword[i] = t;
+						i++;
+					}
+					system("cls||clear");
+					if (strcmp(inputepassword, temp->data.password) != 0) {
+						printf(Red);
+						printf("Password is WRONG!\ntry again\n");
+						printf(Reset);
+						Sleep(2000);
+						continue;
+					}
+					printwelcome();
+					Sleep(2000);
+					system("cls||clear");
+					return temp->data;
+				}
+			}
+			if (choice[0] == '2')
+			{
+				for (;;) {
+					system("cls||clear");
+					printf(Blue);
+					printf("please enter your email address: ");
+					printf(Reset);
+					char inputemail[30] = { '\0' };
+					gets_s(inputemail);
+					if (strcmp(inputemail, temp->data.email) != 0) {
+						system("cls||clear");
+						printf(Red);
+						printf("email address is wrong!\ntry again\n");
+						printf(Reset);
+						Sleep(2000);
+						continue;
+					}
+					break;
+				}
+				for (;;) {
+					system("cls||clear");
+					printf(Green);
+					printf("Reset Password\n\n");
+					printf(Blue);
+					printf("please enter your new password:\n");
+					printf(Reset);
+					char inputepassword[30] = { '\0' };
+					for (int i = 0;; i++) {
+						char t = _getch();
+						if (t == '\r') {
+							inputepassword[i] = '\0';
+							break;
+						}
+						else if (t == '\b' && i > 0) {
+							printf("\b \b");
+							i--;
+							continue;
+						}
+						if (t == '\b' && i == 0)continue;
+						printf("*");
+						inputepassword[i] = t;
+					}
+					if (strlen(inputepassword) < 8) {
+						system("cls||clear");
+						printf(Red);
+						printf("your password is too short!\nit must be more than 8 characters");
+						printf(Reset);
+						Sleep(2000);
+						system("cls||clear");
+						continue;
+					}
+					printf("\n");
+					printf(Blue);
+					printf("please confirm your password:\n");
+					printf(Reset);
+					char confirmpassword[30] = { '\0' };
+					for (int i = 0;; i++) {
+						char t = _getch();
+						if (t == '\r') {
+							confirmpassword[i] = '\0';
+							break;
+						}
+						else if (t == '\b' && i > 0) {
+							printf("\b \b");
+							i--;
+							continue;
+						}
+						if (t == '\b' && i == 0)continue;
+						printf("*");
+						confirmpassword[i] = t;
+					}
+					int t = strcmp(inputepassword, confirmpassword);
+					if (t != 0) {
+						system("cls||clear");
+						printf(Red);
+						printf("password confirmation failed");
+						printf(Reset);
+						Sleep(2000);
+						system("cls||clear");
+						continue;
+					}
+					system("cls||clear");
+					printf(Green);
+					printf("password changed");
+					printf(Reset);
+					Sleep(2000);
+					system("cls||clear");
+					strcpy_s(temp->data.password, inputepassword);
+					return temp->data;
+				}
+
+
+
+
+			}
+			else {
+				inputEROR();
+				continue;
+			}
+
+
+
+		}
+	}
+}
+ 
 
 int main() {
 
@@ -362,7 +569,10 @@ int main() {
 		int choice = firstmenu();
 		profile user1;
 		if (choice == 1) {
-			
+			user1 = signin(&head);
+			savedata(head);
+			strcpy(player1.name, user1.username);
+			player1.win = 0;
 		}
 		if (choice == 2) {
 			signup(&head);
