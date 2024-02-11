@@ -783,8 +783,48 @@ int gamemenu(users** head, char username[30]) {
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
 
- 
+int  map1[25][100];
+
+int game1(users** head, player* player1, player* player2) {
+
+
+
+	player1->health = 0;
+	player2->health = 0;
+	system("cls||clear");
+	printf(Green);
+	printf("Please enter players Hp\n");
+	printf(Reset);
+	scanf("%d", &player1->health);
+	player2->health = player1->health;
+	system("cls||clear");
+
+
+
+	player1->i = 12;
+	player1->j = 8;
+	player1->power = 1;
+	player1->ghostmode = 0;
+	player1->lastmovement = 'd';
+	player1->grenade = 0;
+	player1->firstcoord.X = 12;
+	player1->firstcoord.Y = 8;
+
+	player2->i = 12;
+	player2->j = 90;
+	player2->power = 1;
+	player2->ghostmode = 0;
+	player2->lastmovement = 'j';
+	player2->grenade = 0;
+	player2->firstcoord.X = 12;
+	player2->firstcoord.Y = 90;
+
+	
+
+
+}
 
 int main() {
 
@@ -832,6 +872,13 @@ int main() {
 				player2.win = 0;
 
 				system("cls||clear");
+
+				for (int i = 0; i < 25; i++) {
+					for (int j = 0; j < 100; j++) {
+						map1[i][j] = 0;
+					}
+				}
+				int t = game1(&head, &player1, &player2);
 
 			}
 				
