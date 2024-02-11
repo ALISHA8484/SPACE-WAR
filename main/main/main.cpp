@@ -1275,7 +1275,14 @@ void controler2(player* player2, char input) {
 
 }
 
-
+void winnername(player playerx) {
+	system("cls||clear");
+	printf(Yellow);
+	printf("%s wons", playerx.name);
+	printf(Reset);
+	Sleep(2000);
+	system("cls||clear");
+}
 //////////////////////////////////////////////////////////////////////////////
 
 void creatmap1() {
@@ -1660,6 +1667,81 @@ int game1(users** head, player* player1, player* player2) {
 				
 			}
 
+			if (player1->health <= 0) {
+				END = 1;
+				winnername(*player2);
+				player2->win++;
+				return 2;
+			}
+			if (player2->health <= 0) {
+				END = 2;
+				winnername(*player1);
+				player1->win++;
+				return 1;
+			}
+
+
+
+			int h = (rand() % (500 - 0 + 1)) + 0;
+			if (h == 5) {
+				if (heartkiton == 1)continue;
+				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+				if (map1[numi][numj] == 0) {
+					map1[numi][numj] = 5;
+					heartkiton = 1;
+				}
+				gotoxy(numi, 0);
+				for (int j = 0; j <= 99; j++) {
+					converttochar1(numi, j);
+				}
+			}
+			if (h == 0) {
+				if (poweron == 1)continue;
+				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+				if (map1[numi][numj] == 0) {
+					map1[numi][numj] = 7;
+					poweron = 1;
+				}
+				gotoxy(numi, 0);
+				for (int j = 0; j <= 99; j++) {
+
+					converttochar1(numi, j);
+				}
+
+			}
+			if (h == 4) {
+				if (grenadeon == 1)continue;
+				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+				if (map1[numi][numj] == 0) {
+					map1[numi][numj] = 4;
+					grenadeon = 1;
+				}
+				gotoxy(numi, 0);
+				for (int j = 0; j <= 99; j++) {
+					converttochar1(numi, j);
+				}
+			}
+			if (h == 100) {
+				if (ghostexist == 1) {
+					continue;
+				}
+				if (ghostmodeon == 1) {
+					continue;
+				}
+				int numi = (rand() % (23 - 1 + 1)) + 0;     // i
+				int numj = (rand() % (98 - 1 + 1)) + 0;     // j
+				if (map1[numi][numj] == 0) {
+					map1[numi][numj] = 10;
+					ghostexist = 1;
+				}
+				gotoxy(numi, 0);
+				for (int j = 0; j <= 99; j++) {
+					converttochar1(numi, j);
+				}
+			}
 		}
 		
 		
