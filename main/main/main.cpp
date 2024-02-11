@@ -107,3 +107,114 @@ typedef struct history {
 	int thirdwinnerID;
 	int totalwinnerID;
 };
+
+
+void firstwellcome() {
+	system("cls||clear");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t");
+	char wellcome[30] = " WELLCOME TO  SPACE WAR!!";
+	printf(Green);
+	for (int i = 0; i < 25; i++) {
+		printf("%c", wellcome[i]);
+		_sleep(85);
+	}
+	printf(Reset);
+	printf("\n\n\t\t\t\t\t\t\t\t");
+	char creator[35] = "DEVELOPED BY ALISHA";
+	for (int i = 0; i < 19; i++) {
+		printf("\033[1;34m%c\033[0m", creator[i]);
+		_sleep(200);
+	}
+	_sleep(4000);
+	system("cls||clear");
+}
+
+users* readfile() {
+	FILE* ppp;
+	fopen_s(&ppp, "E:\\programing\\space war\\FILE\\users.bin", "r+b");
+	if (ppp == NULL) {
+		fopen_s(&ppp, "E:\\programing\\space war\\FILE\\users.bin", "w+b");
+	}
+	if (ppp == NULL) {
+		printf("opening file failed");
+		return 0;
+	}
+	users temp;
+	users* head = NULL;
+	for (; fread(&temp.data, sizeof(profile), 1, ppp) > 0;) {
+		users* newnode = (users*)malloc(sizeof(users));
+		newnode->data = temp.data;
+		newnode->next = NULL;
+		newnode->data.point = temp.data.point;
+
+		if (head == NULL)
+		{
+			head = newnode;
+		}
+		else {
+			newnode->next = head;
+			head = newnode;
+		}
+	}
+	fclose(ppp);
+	if (head == NULL)
+	{
+		head = (struct users*)malloc(sizeof(struct users));
+		head->next = NULL;
+		head->data.id = 0;
+		head->data.point = 0;
+	}
+	return head;
+}
+
+int firstmenu() {
+	for (;;) {
+		system("cls||clear");
+		printf(Orange);
+		printf("MENU\n\n1-Sign in\n\n2-Sign up\n\n3-EXIT:(\n");
+		printf(Reset);
+		char choice[50];
+		gets_s(choice);
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		switch (choice[0])
+		{
+		case '1':
+			return 1;
+		case '2':
+			return 2;
+		case '3':
+			return 3;
+		default:
+			inputEROR();
+			break;
+		}
+	}
+
+}
+
+int main() {
+	printf("\033[48;2;128;0;128m");
+	firstwellcome();
+	player player1;
+	player player2;
+	for (;;) {
+		int choice = firstmenu();
+		profile user1;
+		if (choice == 1) {
+			
+		}
+		if (choice == 2) {
+			
+		}
+		if (choice == 3) {
+			system("cls||clear");
+			return 0;
+		}
+		
+
+	}
+	exit(0);
+}
