@@ -710,7 +710,93 @@ profile player2login(users** head, char username[30]) {
 	}
 }
 
+void readhistory(users user, users* head) {
+	system("cls||clear");
+	FILE* hhh;
+	fopen_s(&hhh, "E:\\programing\\space war\\FILE\\history.bin", "rb");
+	if (hhh == NULL) {
+		system("cls||clear");
+		printf(Red);
+		printf("History is empty!!!");
+		printf(Reset);
+		_getch();
+		return;
+	}
+	history temp;
+	int playedanygame = 0;
+	printf("\tMatchs\t\t First winner\t   Second winner\t Third winner\t    Game winner\n");
+	printf(Cyan);
+	printf(" -------------------------------------------------------------------------------------------------\n");
+	int linenum = 1;
+	for (; fread(&temp, sizeof(history), 1, hhh) > 0;) {
+		if (temp.fplayerID == user.data.id || temp.splayerID == user.data.id) {
+			linenum++;
+			char match[40];
+			strcpy(match, findusernamewithid(head, temp.fplayerID));
+			strcat(match, " vs ");
+			strcat(match, findusernamewithid(head, temp.splayerID));
+			playedanygame = 1;
+			printf(Cyan);
+			printf("| ");
+			printf(Blue);
+			printf("%s", match);
+			printf(Cyan);
+			gotoxy(linenum, 22);
+			printf("|       ");
+			if (strcmp(findusernamewithid(head, temp.firstwinnerID), user.data.username) == 0)printf(Green);
+			else printf(Red);
+			printf("%s", findusernamewithid(head, temp.firstwinnerID));
+			printf(Cyan);
+			gotoxy(linenum, 41);
+			printf("|       ");
+			if (strcmp(findusernamewithid(head, temp.secondwinnerID), user.data.username) == 0)printf(Green);
+			else printf(Red);
+			printf("%s", findusernamewithid(head, temp.secondwinnerID));
+			printf(Cyan);
+			gotoxy(linenum, 60);
+			printf("|       ");
+			if (strcmp(findusernamewithid(head, temp.thirdwinnerID), user.data.username) == 0)printf(Green);
+			else printf(Red);
+			printf("%s", findusernamewithid(head, temp.thirdwinnerID));
+			printf(Cyan);
+			gotoxy(linenum, 79);
+			printf("|       ");
+			if (strcmp(findusernamewithid(head, temp.totalwinnerID), user.data.username) == 0)printf(Yellow);
+			else printf(Brown);
+			printf("%s", findusernamewithid(head, temp.totalwinnerID), user.data.username);
+			printf(Cyan);
+			gotoxy(linenum, 98);
+			printf("|");
+			printf("\n");
+			printf(" -------------------------------------------------------------------------------------------------\n");
+			linenum++;
+		}
+	}
+	fclose(hhh);
+	if (playedanygame == 1) {
+		printf(Purple);
+		printf("\nYour score:   ");
+		if (user.data.point >= 0)printf(Yellow);
+		else printf(Red);
+		printf("%d", user.data.point);
+		printf(Reset);
+	}
+	if (playedanygame == 0) {
+		system("cls||clear");
+		printf(Red);
+		printf("You have not played any games !!!");
+		printf(Reset);
+	}
+	_getch();
+	system("cls||clear");
+}
+void savehistory(history histo) {
 
+	FILE* hhh;
+	fopen_s(&hhh, "E:\\programing\\space war\\FILE\\history.bin", "ab");
+	fwrite(&histo, sizeof(history), 1, hhh); 
+	fclose(hhh); 
+}
 
 int firstmenu() {
 	for (;;) {
@@ -4644,6 +4730,8 @@ int main() {
 				}
 
 				//
+
+				savehistory(histo);
 				userpointsave(&head, user1);
 				userpointsave(&head, user2); 
 
