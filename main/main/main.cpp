@@ -854,7 +854,7 @@ int gamemenu(users** head, char username[30]) {
 			continue;
 		}
 		else if (choice[0] == '3') {
-			
+			readhistory(*temp, *head);
 		}
 		else if (choice[0] == '4') {
 			return 0;
