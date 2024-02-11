@@ -4643,8 +4643,10 @@ int game3(users** head, player* player1, player* player2) {
 ///////////////////////////////////////////////////////////////////////////////
 int main() {
 
+	PlaySound(TEXT("E:\\programing\\space war\\MUSIC\\PS2.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	printf("\033[48;2;128;0;128m");
 	firstwellcome();
+	PlaySound(TEXT("E:\\programing\\space war\\MUSIC\\GTA.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	struct users* head = readfile();
 	player player1;
@@ -4688,6 +4690,7 @@ int main() {
 				histo.fplayerID = user1.id;
 				histo.splayerID = user2.id;
 				//
+				PlaySound(TEXT("E:\\programing\\space war\\MUSIC\\epic2.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				system("cls||clear");
 				//
 				for (int i = 0; i < 25; i++) {
