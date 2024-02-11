@@ -106,6 +106,13 @@ typedef struct history {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void gotoxy(int x, int y) {
+	COORD coord;
+	coord.X = y;
+	coord.Y = x;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
 void inputEROR() {
 	system("cls||clear");
 	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\ \033[1;31m% WRONG INPUTE!!!!TRY AGAIN\033[0m");
@@ -912,13 +919,6 @@ void winnername(player playerx) {
 	printf(Reset);
 	Sleep(2000);
 	system("cls||clear");
-}
-
-void gotoxy(int x, int y) {
-	COORD coord;
-	coord.X = y;
-	coord.Y = x;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
 void converttochar1(int i, int j) {
