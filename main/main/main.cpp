@@ -196,74 +196,7 @@ void savedata(users* head) {
 	fclose(ppp);
 }
 
-int firstmenu() {
-	for (;;) {
-		system("cls||clear");
-		printf(Orange);
-		printf("MENU\n\n1-Sign in\n\n2-Sign up\n\n3-EXIT:(\n");
-		printf(Reset);
-		char choice[50];
-		gets_s(choice);
-		if (strlen(choice) > 1) {
-			inputEROR();
-			continue;
-		}
-		switch (choice[0])
-		{
-		case '1':
-			return 1;
-		case '2':
-			return 2;
-		case '3':
-			return 3;
-		default:
-			inputEROR();
-			break;
-		}
-	}
 
-}
-int gamemenu(users** head, char username[30]) {
-	users* temp;
-	temp = *head;
-	for (;;) {
-		if (strcmp(temp->data.username, username) == 0) {
-			break;
-		}
-		temp = temp->next;
-	}
-	for (;;) {
-		system("cls||clear");
-		printf(Purple);
-		printf("GAME MENU\n\n1-start game\n\n2-Change user information\n\n3-history\n\n4-Return to login page\n");
-		printf(Reset);
-		char choice[50];
-		gets_s(choice);
-		if (strlen(choice) > 1) {
-			inputEROR();
-			continue;
-		}
-		else if (choice[0] == '1') {
-			return 1;
-		}
-		else if (choice[0] == '2') {
-			
-		}
-		else if (choice[0] == '3') {
-			
-		}
-		else if (choice[0] == '4') {
-			return 0;
-		}
-		else {
-			inputEROR();
-			continue;
-		}
-	}
-
-
-
-}
 void signup(users** head) {
 	system("cls||clear");
 	printf(Green);
@@ -595,6 +528,214 @@ profile signin(users** head) {
 		}
 	}
 }
+void Changeuserinformation(users** head, users* temp) {
+	FILE* hhh;
+	fopen_s(&hhh, "E:\\programing\\space war\\FILE\\history.bin", "r+b");
+	for (;;) {
+
+		system("cls||clear");
+		printf("1-Change username\n\n2-Change password\n\n3-Change email address\n\n4-back\n");
+		char choice[50];
+		gets_s(choice);
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		if (choice[0] == '1') {
+			for (;;) {
+				system("cls||clear");
+				printf("please enter your new username:");
+				char inputeusername[30] = { '\0' };
+				gets_s(inputeusername);
+				users* check = *head;
+				int change = 0;
+				for (;;) {
+					if (strcmp(inputeusername, temp->data.username) == 0) {
+						system("cls||clear");
+						printf("This is your username!\nchange it :) ");
+						Sleep(2000);
+						break;
+					}
+
+					if (strcmp(check->data.username, inputeusername) == 0) {
+						system("cls||clear");
+						printf("This user name is already exist");
+						Sleep(2000);
+						break;
+					}
+
+					if (check->next == NULL) {
+						change = 1;
+						break;
+					}
+					check = check->next;
+				}
+				if (change == 0) {
+					continue;
+				}
+
+				strcpy(temp->data.username, inputeusername);
+				system("cls||clear");
+				printf("User name changed");
+				Sleep(2000);
+				break;
+			}
+
+		}
+
+
+		else if (choice[0] == '2') {
+
+			for (;;) {
+				system("cls||clear");
+				printf("please enter your new password:\n");
+				char inputepassword[30] = { '\0' };
+				for (int i = 0;; i++) {
+					char t = _getch();
+					if (t == '\r') {
+						break;
+					}
+					printf("*");
+					inputepassword[i] = t;
+				}
+				if (strlen(inputepassword) < 8) {
+					system("cls||clear");
+					printf("your password is too short!\nit must be more than 8 characters");
+					Sleep(2000);
+					system("cls||clear");
+					continue;
+				}
+				printf("\n");
+				printf("please confirm your password:\n");
+				char confirmpassword[30] = { '\0' };
+				for (int i = 0;; i++) {
+					char t = _getch();
+					if (t == '\r') {
+						break;
+					}
+					printf("*");
+					confirmpassword[i] = t;
+				}
+				if (strcmp(inputepassword, confirmpassword) != 0) {
+					system("cls||clear");
+					printf("password confirmation failed");
+					Sleep(2000);
+					system("cls||clear");
+					continue;
+				}
+				system("cls||clear");
+				strcpy_s(temp->data.password, inputepassword);
+				printf("password changed");
+
+				Sleep(2000);
+				system("cls||clear");
+				break;
+			}
+
+		}
+
+
+
+		else if (choice[0] == '3') {
+			char newemail[30] = { '\0' };
+			system("cls||clear");
+			printf("please enter your new email address:");
+			gets_s(newemail);
+			strcpy(temp->data.email, newemail);
+			system("cls||clear");
+			printf("your email updated");
+			Sleep(2000);
+		}
+		else if (choice[0] == '4') {
+			return;
+		}
+		else {
+			inputEROR();
+			continue;
+		}
+	}
+
+
+
+
+
+
+
+
+}
+
+int firstmenu() {
+	for (;;) {
+		system("cls||clear");
+		printf(Orange);
+		printf("MENU\n\n1-Sign in\n\n2-Sign up\n\n3-EXIT:(\n");
+		printf(Reset);
+		char choice[50];
+		gets_s(choice);
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		switch (choice[0])
+		{
+		case '1':
+			return 1;
+		case '2':
+			return 2;
+		case '3':
+			return 3;
+		default:
+			inputEROR();
+			break;
+		}
+	}
+
+}
+int gamemenu(users** head, char username[30]) {
+	users* temp;
+	temp = *head;
+	for (;;) {
+		if (strcmp(temp->data.username, username) == 0) {
+			break;
+		}
+		temp = temp->next;
+	}
+	for (;;) {
+		system("cls||clear");
+		printf(Purple);
+		printf("GAME MENU\n\n1-start game\n\n2-Change user information\n\n3-history\n\n4-Return to login page\n");
+		printf(Reset);
+		char choice[50];
+		gets_s(choice);
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		else if (choice[0] == '1') {
+			return 1;
+		}
+		else if (choice[0] == '2') {
+			Changeuserinformation(head, temp);
+			savedata(*head);
+			continue;
+		}
+		else if (choice[0] == '3') {
+			
+		}
+		else if (choice[0] == '4') {
+			return 0;
+		}
+		else {
+			inputEROR();
+			continue;
+		}
+	}
+
+
+
+}
+
+
  
 
 int main() {
