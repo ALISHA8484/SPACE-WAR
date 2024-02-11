@@ -1284,7 +1284,704 @@ void winnername(player playerx) {
 	system("cls||clear");
 }
 
+bullet* deleteheadbullet(bullet** hbullet, bullet* temp) {
+	if (temp == *hbullet) {
+		bullet* db = (bullet*)malloc(sizeof(bullet));
+		db = temp;
+		*hbullet = ((*hbullet)->next);
+		temp = temp->next;
+		free(db);
+	}
+	return temp;
+} 
+void bulletmoving(bullet** hbullet, player* player1, player* player2) {
+	bullet* temp = *hbullet;
+	bullet* prev = (bullet*)malloc(sizeof(bullet));
+	if (*hbullet == NULL) {
+		return;
+	}
+	else {
+		for (; temp != NULL;) {
 
+			if (temp->ghost == 0) {
+				if (temp->side == 'd' || temp->side == 'D') {
+
+					if (map1[temp->i][temp->j + 1] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						prev->next = temp->next;
+						temp = temp->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 8) {
+						
+						temp->side = 'a';
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						printhealthline(player1, player2);
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						player2->health -= temp->damage;
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+
+					if (map1[temp->i][temp->j + 1] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'a' || temp->side == 'A') {
+					if (map1[temp->i][temp->j - 1] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 8) {
+						
+						temp->side = 'd';
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						gotoxy(0, 0);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i][temp->j - 1] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'w' || temp->side == 'W') {
+
+					if (map1[temp->i - 1][temp->j] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 8) {
+						
+						temp->side = 's';
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i - 1][temp->j] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 's' || temp->side == 'S') {
+					if (map1[temp->i + 1][temp->j] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 8) {
+						
+						temp->side = 'w';
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i + 1][temp->j] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+
+
+				if (temp->side == 'l' || temp->side == 'L') {
+					if (map1[temp->i][temp->j + 1] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 8) {
+						
+						temp->side = 'j';
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j + 1] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i][temp->j + 1] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'j' || temp->side == 'J') {
+					if (map1[temp->i][temp->j - 1] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 8) {
+						
+						temp->side = 'l';
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i][temp->j - 1] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i][temp->j - 1] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->j--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'i' || temp->side == 'I') {
+					
+					if (map1[temp->i - 1][temp->j] == 9) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 8) {
+						
+						temp->side = 'k';
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i - 1][temp->j] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i - 1][temp->j] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i -= 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i--;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+				if (temp->side == 'k' || temp->side == 'K') {
+					if (map1[temp->i + 1][temp->j] == 9) {
+						
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 8) {
+						
+						temp->side = 'i';
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 1) {
+						
+						map1[temp->i][temp->j] = 0;
+						player1->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					else if (map1[temp->i + 1][temp->j] == 2) {
+						
+						map1[temp->i][temp->j] = 0;
+						player2->health -= temp->damage;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						printhealthline(player1, player2);
+						if (*hbullet == temp) {
+							temp = deleteheadbullet(hbullet, temp);
+							continue;
+						}
+						bullet* bdelete = (bullet*)malloc(sizeof(bullet));
+						bdelete = temp;
+						temp = temp->next;
+						prev->next = bdelete->next;
+						free(bdelete);
+						continue;
+					}
+					if (map1[temp->i + 1][temp->j] != 0) {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i += 2;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+					else {
+						map1[temp->i][temp->j] = 0;
+						changes.X = temp->i;
+						changes.Y = temp->j;
+						printchanges();
+						temp->i++;
+						if (map1[temp->i][temp->j] == 0) {
+							map1[temp->i][temp->j] = 3;
+						}
+					}
+				}
+
+
+			}
+			changes.X = temp->i;
+			changes.Y = temp->j;
+			printchanges();
+			prev = temp;
+			temp = temp->next;
+		}
+		if (prev->i < 0) {
+			*hbullet = NULL;
+		}
+	}
+}
 bullet* creatbullet(bullet** hbullet, player* playerx) {
 	bullet* newb = (bullet*)malloc(sizeof(bullet));
 	newb->side = playerx->lastmovement;
@@ -1330,6 +2027,7 @@ bullet* creatbullet(bullet** hbullet, player* playerx) {
 	*hbullet = newb;
 	return *hbullet;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -1721,7 +2419,14 @@ int game1(users** head, player* player1, player* player2) {
 				
 			}
 			if (input == 'N' || input == 'n') {
-				
+
+				if (powercontrol2 > 0)powercontrol2--;
+				if (powercontrol2 == 0) {
+					player2->power = 1;
+					printdamageline(player1, player2);
+				}
+				hbullet = creatbullet(&hbullet, player2);
+
 			}
 			printchanges();
 			
