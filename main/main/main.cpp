@@ -710,6 +710,8 @@ profile player2login(users** head, char username[30]) {
 	}
 }
 
+
+
 int firstmenu() {
 	for (;;) {
 		system("cls||clear");
@@ -801,6 +803,8 @@ int ghostmodecharge;
 
 int timer1s = 0;
 int timer2s = 0;
+
+//////////////////////////////////////////////////////////////////////////////////
 
 void winnername(player playerx) {
 	system("cls||clear");
@@ -3113,6 +3117,21 @@ bullet* creatbullet(bullet** hbullet, player* playerx) {
 	return *hbullet;
 }
 
+void userpointsave(users** head, profile user) {
+	users* temp;
+	temp = *head;
+	for (;;) {
+		if (strcmp(temp->data.username, user.username) == 0) {
+			temp->data = user;
+			savedata(*head);
+			return;
+		}
+		temp = temp->next;
+
+	}
+
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -4561,21 +4580,72 @@ int main() {
 			for (;;) {
 				profile user2;
 				user2 = player2login(&head, user1.username);
-				savedata(head);
-				//
 				strcpy(player2.name, user2.username);
-
+				savedata(head);
 				player1.win = 0;
 				player2.win = 0;
-
+				//
+				history histo;
+				histo.fplayerID = user1.id;
+				histo.splayerID = user2.id;
+				//
 				system("cls||clear");
-
+				//
 				for (int i = 0; i < 25; i++) {
 					for (int j = 0; j < 100; j++) {
 						map1[i][j] = 0;
 					}
 				}
 				int t = game1(&head, &player1, &player2);
+				if (t == 1) {
+					histo.firstwinnerID = user1.id;
+				}
+				if (t == 2) {
+					histo.firstwinnerID = user2.id;
+				}
+				//
+				for (int i = 0; i < 25; i++) {
+					for (int j = 0; j < 100; j++) {
+						map1[i][j] = 0;
+					}
+				}
+				t = game2(&head, &player1, &player2);
+				if (t == 1) {
+					histo.secondwinnerID = user1.id;
+				}
+				if (t == 2) {
+					histo.secondwinnerID = user2.id;
+				}
+				//
+				for (int i = 0; i < 25; i++) {
+					for (int j = 0; j < 100; j++) {
+						map1[i][j] = 0;
+					}
+				}
+				t = game3(&head, &player1, &player2);
+				if (t == 1) {
+					histo.thirdwinnerID = user1.id;
+				}
+				if (t == 2) {
+					histo.thirdwinnerID = user2.id;
+				}
+
+				///
+				if (player1.win > player2.win) {
+					user1.point += 20;
+					user2.point -= 10;
+					histo.totalwinnerID = user1.id;
+				}
+				else {
+
+					user2.point += 20;
+					user1.point -= 10;
+					histo.totalwinnerID = user2.id;
+				}
+
+				//
+				userpointsave(&head, user1);
+				userpointsave(&head, user2); 
 
 			}
 				
