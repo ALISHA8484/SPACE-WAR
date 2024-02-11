@@ -223,7 +223,47 @@ int firstmenu() {
 	}
 
 }
+int gamemenu(users** head, char username[30]) {
+	users* temp;
+	temp = *head;
+	for (;;) {
+		if (strcmp(temp->data.username, username) == 0) {
+			break;
+		}
+		temp = temp->next;
+	}
+	for (;;) {
+		system("cls||clear");
+		printf(Purple);
+		printf("GAME MENU\n\n1-start game\n\n2-Change user information\n\n3-history\n\n4-Return to login page\n");
+		printf(Reset);
+		char choice[50];
+		gets_s(choice);
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		else if (choice[0] == '1') {
+			return 1;
+		}
+		else if (choice[0] == '2') {
+			
+		}
+		else if (choice[0] == '3') {
+			
+		}
+		else if (choice[0] == '4') {
+			return 0;
+		}
+		else {
+			inputEROR();
+			continue;
+		}
+	}
 
+
+
+}
 void signup(users** head) {
 	system("cls||clear");
 	printf(Green);
@@ -580,10 +620,12 @@ int main() {
 			continue;
 		}
 		if (choice == 3) {
+			savedata(head);
 			system("cls||clear");
 			return 0;
 		}
-		
+		system("cls||clear");
+		int y = gamemenu(&head, user1.username);
 
 	}
 	exit(0);
