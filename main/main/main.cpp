@@ -205,6 +205,150 @@ int firstmenu() {
 	}
 
 }
+void signup(users** head) {
+	system("cls||clear");
+	printf(Green);
+	printf("enter 1 to exit\n");
+	printf("please enter your user name:");
+	printf(Reset);
+	/*int id = 0;*/
+	char inputeusername[30] = { '\0' };
+	char emailaddress[30] = { '\0' };
+	char inputepassword[30] = { '\0' };
+	char confirmpassword[30] = { '\0' };
+
+	users* temp;
+	temp = *head;
+	scanf("%s", inputeusername);
+	getchar();
+	if (strcmp(inputeusername, "1") == 0) {
+		system("cls||clear");
+		return;
+	}
+	for (;;) {
+		int t = strcmp(temp->data.username, inputeusername);
+		if (t == 0) {
+			system("cls||clear");
+			printf(Red);
+			printf("This user name is already exist");
+			printf(Reset);
+			Sleep(2000);
+			signup(head);
+			return;
+		}
+		if (temp->next == NULL) {
+			break;
+		}
+		temp = temp->next;
+	}
+	system("cls||clear");
+	printf(Yellow);
+	printf("Hiiiiii %s", inputeusername);
+	printf(Reset);
+	Sleep(2000);
+	for (;;) {
+		system("cls||clear");
+		printf(Green);
+		printf("please enter your password:\n");
+		printf(Reset);
+		for (int i = 0; i < 30; ++i) {
+			inputepassword[i] = '\0';
+		}
+		for (int i = 0; i < 30; ++i) {
+			confirmpassword[i] = '\0';
+		}
+		for (int i = 0;;) {
+			char t = _getch();
+			if (t == '\r') {
+				inputepassword[i] = '\0';
+				break;
+			}
+			else if (t == '\b' && i > 0) {
+				printf("\b \b");
+				i--;
+				continue;
+			}
+			if (t == '\b' && i == 0)continue;
+			printf("*");
+			inputepassword[i] = t;
+			i++;
+		}
+		if (strlen(inputepassword) < 8) {
+			system("cls||clear");
+			printf(Red);
+			printf("your password is too short!\nit must be more than 8 characters");
+			printf(Reset);
+			Sleep(2000);
+			system("cls||clear");
+			continue;
+		}
+		printf("\n");
+		printf(Green);
+		printf("please confirm your password\n");
+		printf(Reset);
+		for (int i = 0;; ) {
+			char t = _getch();
+			if (t == '\r') {
+				confirmpassword[i] = '\0';
+				break;
+			}
+			else if (t == '\b' && i > 0) {
+				printf("\b \b");
+				i--;
+				continue;
+			}
+			if (t == '\b' && i == 0)continue;
+			printf("*");
+			confirmpassword[i] = t;
+			i++;
+		}
+
+		if (strcmp(inputepassword, confirmpassword) != 0) {
+			system("cls||clear");
+			printf(Red);
+			printf("password confirmation failed");
+			printf(Reset);
+			Sleep(2000);
+			continue;
+		}
+		system("cls||clear");
+		printf(Green);
+		printf("please enter your email\n");
+		printf(Reset);
+		gets_s(emailaddress);
+		system("cls||clear");
+		printf(Pink);
+		printf("your account successfully created");
+		printf(Reset);
+		Sleep(2000);
+		system("cls||clear");
+		break;
+	}
+	if (temp->data.id != 0) {
+		users* newnode = (users*)malloc(sizeof(users));
+		int maxID = 0;
+		users* maxfinder = *head;
+		for (; maxfinder != NULL;) {
+			if (maxfinder->data.id > maxID)maxID = maxfinder->data.id;
+			maxfinder = maxfinder->next;
+		}
+		strcpy_s(newnode->data.username, inputeusername);
+		strcpy_s(newnode->data.password, inputepassword);
+		strcpy_s(newnode->data.email, emailaddress);
+		newnode->data.id = (maxID + 1);
+		temp->next = newnode;
+		newnode->next = NULL;
+		newnode->data.point = 0;
+		return;
+	}
+	/*id++;*/
+	strcpy_s(temp->data.username, inputeusername);
+	strcpy_s(temp->data.password, inputepassword);
+	strcpy_s(temp->data.email, emailaddress);
+	temp->data.id = 1;
+	temp->data.point = 0;
+	*head = temp;
+}
 
 int main() {
 
@@ -221,7 +365,9 @@ int main() {
 			
 		}
 		if (choice == 2) {
-			
+			signup(&head);
+			savedata(head);
+			continue;
 		}
 		if (choice == 3) {
 			system("cls||clear");
