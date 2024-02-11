@@ -663,6 +663,54 @@ void Changeuserinformation(users** head, users* temp) {
 
 
 }
+profile player2login(users** head, char username[30]) {
+	for (;;) { 
+		profile player2;
+		system("cls||clear");
+		printf(Pink);
+		printf("Player2 login:\n\n");
+		printf("1-Sign in\n\n2-Sign up\n\n");
+		printf(Reset);
+		char choice[50];
+		scanf("%s", choice);
+		getchar();
+		if (strlen(choice) > 1) {
+			inputEROR();
+			continue;
+		}
+		if (choice[0] == '1') {
+			player2 = signin(head);
+			if (strcmp(player2.username, username) == 0) {
+				system("cls||clear");
+				printf(Red);
+				printf("This user is player1!\n\ntry again");
+				printf(Reset);
+				Sleep(2000);
+				continue;
+			}
+			return player2;
+		}
+		else if (choice[0] == '2') {
+			system("cls||clear");
+			signup(head);
+			users* temp = *head;
+			for (; temp->next != NULL;) {
+				temp = temp->next;
+			}
+			strcpy(player2.username, temp->data.username);
+			strcpy(player2.email, temp->data.email);
+			strcpy(player2.password, temp->data.password);
+			player2.id = temp->data.id;
+			player2.point = temp->data.point;
+			return player2;
+		}
+		else {
+			inputEROR();
+			continue;
+		}
+
+	}
+}
 
 int firstmenu() {
 	for (;;) {
@@ -767,7 +815,28 @@ int main() {
 		}
 		system("cls||clear");
 		int y = gamemenu(&head, user1.username);
+		if (y == 0) {
+			system("cls||clear");
+			continue;
+		}
+		if (y == 1) {
 
+			for (;;) {
+				profile user2;
+				user2 = player2login(&head, user1.username);
+				savedata(head);
+				//
+				strcpy(player2.name, user2.username);
+
+				player1.win = 0;
+				player2.win = 0;
+
+				system("cls||clear");
+
+			}
+				
+
+		}
 	}
 	exit(0);
 }
