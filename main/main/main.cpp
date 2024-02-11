@@ -786,6 +786,19 @@ int gamemenu(users** head, char username[30]) {
 int  map1[25][100];
 COORD changes;
 
+int powercontrol1;
+int powercontrol2;
+
+int heartkiton;
+int poweron;
+int ghostexist;
+int grenadeon;
+
+
+int ghosthold;
+int ghostmodeon;
+int ghostmodecharge;
+
 void gotoxy(int x, int y) {
 	COORD coord;
 	coord.X = y;
@@ -1102,7 +1115,7 @@ void whathappend(player* player, int i, int j, int whichplayer) {
 		else {
 			if (map1[i][j] == 5) {
 				player->health += 5;
-				
+				heartkiton = 0;
 				if (whichplayer == 1) {
 					gotoxy(26, 13);
 				}
@@ -1114,27 +1127,29 @@ void whathappend(player* player, int i, int j, int whichplayer) {
 			}
 			if (map1[i][j] == 7) {
 				player->power = 2;
-				
+				poweron = 0;
 				if (whichplayer == 1) {
-					
+					powercontrol1 = 5;
 					gotoxy(27, 16);
 					printf("2");
 					gotoxy(0, 0);
 				}
 				if (whichplayer == 2) {
-					
+					powercontrol2 = 5;
 					gotoxy(27, 88);
 					printf("2");
 					gotoxy(0, 0);
 				}
 			}
 			if (map1[i][j] == 4) {
-				
+				grenadeon = 0;
 				player->grenade = 1;
 			}
 			if (map1[i][j] == 10) {
 				player->ghostmode = 1;
-				
+				ghostexist = 0;
+				ghostmodeon = 1;
+				ghostmodecharge = 50;
 			}
 			map1[player->i][player->j] = 0;
 			player->i = i;
@@ -1149,7 +1164,37 @@ void whathappend(player* player, int i, int j, int whichplayer) {
 		if (player->ghostmode == 1)return;
 
 	}
-	
+	if (player->ghostmode == 1) {
+		if (j > 98 || j < 1 || i>23 || i < 1)return;
+		map1[player->i][player->j] = ghosthold;
+		player->i = i;
+		player->j = j;
+		ghosthold = map1[i][j];
+		if (whichplayer == 1) {
+			map1[player->i][player->j] = 1;
+		}
+		if (whichplayer == 2) {
+			map1[player->i][player->j] = 2;
+		}
+		int x = player->i - 1;
+		int y = player->j - 1;
+		gotoxy((player->i - 1), (player->j - 1));
+		for (int t = 1; t <= 3; t++) {
+			for (int w = 1; w <= 3; w++) {
+				if (x == player->i && y == player->j) {
+					y++;
+					continue;
+				}
+				converttochar1(x, y);
+				y++;
+			}
+			y -= 3;
+			x++;
+			gotoxy(x, y);
+		}
+		gotoxy(0, 0);
+	}
+
 }
 
 void controler1(player* player1, char input) {
@@ -1215,6 +1260,17 @@ void controler2(player* player2, char input) {
 		changes.X = player2->i;
 		changes.Y = player2->j;
 		whathappend(player2, ((player2->i)), ((player2->j) + 1), 2);
+	}
+	if (player2->ghostmode == 1) {
+		ghostmodecharge--;
+		if (ghostmodecharge == 0) {
+			if (ghosthold != 0) {
+				ghostmodecharge++;
+				return;
+			}
+			player2->ghostmode = 0;
+			ghostmodeon = 0;
+		}
 	}
 
 }

@@ -1,0 +1,9 @@
+﻿  main.cpp
+E:\programing\space war\main\main\main.cpp(76,2): warning C4091: 'typedef ': ignored on left of 'player' when no variable is declared
+E:\programing\space war\main\main\main.cpp(83,2): warning C4091: 'typedef ': ignored on left of 'profile' when no variable is declared
+E:\programing\space war\main\main\main.cpp(87,2): warning C4091: 'typedef ': ignored on left of 'users' when no variable is declared
+E:\programing\space war\main\main\main.cpp(96,2): warning C4091: 'typedef ': ignored on left of 'bullet' when no variable is declared
+E:\programing\space war\main\main\main.cpp(105,2): warning C4091: 'typedef ': ignored on left of 'history' when no variable is declared
+E:\programing\space war\main\main\main.cpp(111,9): warning C4129: ' ': unrecognized character escape sequence
+E:\programing\space war\main\main\main.cpp(111,9): warning C4476: 'printf' : unknown type field character 'W' in format specifier
+  main.vcxproj -> E:\programing\space war\main\x64\Debug\main.exe
