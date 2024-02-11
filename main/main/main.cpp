@@ -166,6 +166,17 @@ users* readfile() {
 	}
 	return head;
 }
+void savedata(users* head) {
+
+	FILE* ppp;
+	fopen_s(&ppp, "E:\\programing\\space war\\FILE\\users.bin", "wb");
+	while (head != NULL)
+	{
+		fwrite(&head->data, sizeof(struct profile), 1, ppp);
+		head = head->next;
+	}
+	fclose(ppp);
+}
 
 int firstmenu() {
 	for (;;) {
@@ -196,8 +207,11 @@ int firstmenu() {
 }
 
 int main() {
+
 	printf("\033[48;2;128;0;128m");
 	firstwellcome();
+
+	struct users* head = readfile();
 	player player1;
 	player player2;
 	for (;;) {
