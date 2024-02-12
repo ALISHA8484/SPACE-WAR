@@ -4770,5 +4770,9 @@ int main() {
 
 		}
 	}
+	system("cls||clear"); 
+	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\033[1;32m%HOPE YOU ENJOYED:)\033[0m"); 
+	printf("\n\n\t\t\t\t\t\t\t\t \033[1;34m%[GOODBYE]\033[0m"); 
+	_sleep(5000);
 	exit(0);
 }
