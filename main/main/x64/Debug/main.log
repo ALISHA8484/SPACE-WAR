@@ -11,4 +11,6 @@ E:\programing\space war\main\main\main.cpp(786,72): message : placeholders and t
 E:\programing\space war\main\main\main.cpp(3548,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 E:\programing\space war\main\main\main.cpp(3994,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 E:\programing\space war\main\main\main.cpp(4464,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\programing\space war\main\main\main.cpp(4673,11): warning C4476: 'printf' : unknown type field character 'H' in format specifier
+E:\programing\space war\main\main\main.cpp(4674,11): warning C4476: 'printf' : unknown type field character '[' in format specifier
   main.vcxproj -> E:\programing\space war\main\x64\Debug\main.exe
