@@ -4753,6 +4753,18 @@ int main() {
 				userpointsave(&head, user1);
 				userpointsave(&head, user2); 
 
+				system("cls || clear");
+				printf("do you wanna play again?(y/n)");
+				char input[20];
+				scanf("%s", input);
+				getchar();
+				if (strcmp(input, "y") == 0 || strcmp(input, "Y") == 0) {
+					continue;
+				}
+				else {
+					break;
+				}
+
 			}
 				
 
